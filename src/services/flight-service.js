@@ -88,7 +88,6 @@ async function updateSeats(data){
         const response = await flightRepository.updateRemainingSeats(data.flightId,data.seats,data.dec);
         return response;
     } catch (error) {
-        console.log(error);
         throw new AppError('Cannot updata data of the flight', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 
