@@ -55,20 +55,20 @@ async function createFlight(req, res) {
  * req-body {}
  */
 
-async function getAllFlights(req,res){
+async function getAllFlights(req, res) {
     try {
         const flights = await FlightService.getAllFlights(req.query);
         SuccessResponse.data = flights;
         return res
-            .status(StatusCodes.CREATED)
+            .status(StatusCodes.OK)
             .json(SuccessResponse);
-        
+
     } catch (error) {
         ErrorResponse.error = error;
         return res
             .status(error.statusCode)
             .json(ErrorResponse);
-        
+
     }
 
 }
@@ -79,12 +79,12 @@ async function getAllFlights(req,res){
  * req-body {}
  */
 
-async function getFlight(req,res){
+async function getFlight(req, res) {
     try {
         const flight = await FlightService.getFlight(req.params.id);
         SuccessResponse.data = flight;
         return res
-            .status(StatusCodes.CREATED)
+            .status(StatusCodes.OK)
             .json(SuccessResponse);
 
     } catch (error) {
@@ -96,7 +96,7 @@ async function getFlight(req,res){
     }
 }
 
-async function updateSeats(req,res){
+async function updateSeats(req, res) {
     try {
         const response = await FlightService.updateSeats({
             flightId: req.params.id,
@@ -105,7 +105,7 @@ async function updateSeats(req,res){
         });
         SuccessResponse.data = response;
         return res
-            .status(StatusCodes.CREATED)
+            .status(StatusCodes.OK)
             .json(SuccessResponse);
 
     } catch (error) {
@@ -113,7 +113,7 @@ async function updateSeats(req,res){
         return res
             .status(error.statusCode)
             .json(ErrorResponse);
-        
+
     }
 }
 
