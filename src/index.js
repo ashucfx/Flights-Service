@@ -9,8 +9,8 @@ const app = express();
 
 // CORS configuration - only allow specified origins
 const allowedOrigins = process.env.CORS_ORIGIN
-  ? process.env.CORS_ORIGIN.split(',')
-  : ['http://localhost:3000', 'http://localhost:3002', 'http://frontend:3000'];
+    ? process.env.CORS_ORIGIN.split(',')
+    : ['http://localhost:3000', 'http://localhost:3002', 'http://frontend:3000'];
 
 app.use(cors({
     origin: allowedOrigins,
@@ -34,7 +34,18 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api', apiRoutes);
-app.use('/flightsService/api',apiRoutes);
+app.use('/flightsService/api', apiRoutes);
+
+// Centralized error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Unhandled Exception:', err);
+    res.status(err.statusCode || 500).json({
+        success: false,
+        message: err.message || 'Internal Server Error',
+        data: {},
+        error: err.explanation || err
+    });
+});
 
 
 app.listen(serverConfig.PORT, () => {

@@ -111,10 +111,10 @@ async function destroyAirport(req, res) {
 
 async function updateAirport(req, res) {
     try {
-        const airport = await AirportService.updateAirport(req.params.id);
+        const airport = await AirportService.updateAirport(req.params.id, req.body);
         SuccessResponse.data = airport;
         return res
-            .status(StatusCodes.CREATED)
+            .status(StatusCodes.OK)
             .json(SuccessResponse);
 
     } catch (error) {

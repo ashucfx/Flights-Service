@@ -61,9 +61,9 @@ async function destroyAirport(id) {
 
 }
 
-async function updateAirport(id) {
+async function updateAirport(id, data) {
     try {
-        const response = await airportRepository.update(id);
+        const response = await airportRepository.update(id, data);
         return response;
     } catch (error) {
         if (error.statusCode = StatusCodes.NOT_FOUND) {

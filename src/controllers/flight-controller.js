@@ -117,9 +117,41 @@ async function updateSeats(req, res) {
     }
 }
 
+async function destroyFlight(req, res) {
+    try {
+        const flight = await FlightService.destroyFlight(req.params.id);
+        SuccessResponse.data = flight;
+        return res
+            .status(StatusCodes.OK)
+            .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+            .status(error.statusCode)
+            .json(ErrorResponse);
+    }
+}
+
+async function updateFlight(req, res) {
+    try {
+        const flight = await FlightService.updateFlight(req.params.id, req.body);
+        SuccessResponse.data = flight;
+        return res
+            .status(StatusCodes.OK)
+            .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+            .status(error.statusCode)
+            .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     createFlight,
     getAllFlights,
     getFlight,
-    updateSeats
+    updateSeats,
+    destroyFlight,
+    updateFlight
 }
